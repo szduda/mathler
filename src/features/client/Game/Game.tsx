@@ -88,7 +88,7 @@ export const Game: FC<Props> = ({ riddle, id }) => {
 
         {solved || gameover ? (
           <Button
-            className="bg-orange-700 hover:bg-orange-600"
+            className="bg-yellow-200 !text-[#22222f] hover:bg-yellow-400"
             onClick={clearAnswer}
           >
             Travel Back In Time
