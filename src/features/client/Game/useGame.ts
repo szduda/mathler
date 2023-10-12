@@ -99,7 +99,7 @@ export const useGame = (riddle: number, id: number) => {
     }
 
     setMessage({ text: "Let me check that answer..." });
-    const res = await fetch(`/riddle/${encodeURIComponent(input)}`, {
+    const res = await fetch(`/riddle/${id}/${encodeURIComponent(input)}`, {
       method: "POST",
     });
 

@@ -29,8 +29,14 @@ export const Game: FC<Props> = ({ riddle, id }) => {
     <div className="flex justify-center items-center flex-col">
       <FeedbackMessage solved={solved} gameover={gameover} />
 
+      <h2 className="text-lg tracking-wide text-center mt-3 opacity-70">
+        The hidden calculation equals
+      </h2>
+      <div className="text-3xl rounded-full p-3 bg-black/60 font-black text-white mt-5">
+        {riddle}
+      </div>
       <div
-        className="grid gap-2 my-12"
+        className="grid gap-2 mt-6 mb-12"
         style={{ gridTemplateColumns: `repeat(${INPUT_LENGTH}, 1fr)` }}
       >
         {/* previous answers */}
@@ -95,28 +101,13 @@ export const Game: FC<Props> = ({ riddle, id }) => {
   );
 };
 
-export const Key: FC<{ value: ReactNode } & ComponentProps<"button">> = ({
-  value,
-  ...props
-}) => (
-  <button
-    className={[
-      "rounded-xl h-10 w-full flex justify-center items-center text-[#22222f] font-black text-2xl p-1 tracking-tighter",
-      "bg-neutral-200 hover:bg-neutral-100 active:scale-95",
-    ].join(" ")}
-    {...props}
-  >
-    {value}
-  </button>
-);
-
 export const FeedbackMessage: FC<{ solved?: boolean; gameover?: boolean }> = ({
   solved,
   gameover,
 }) => (
   <h2
     className={[
-      "text-xl tracking-wide text-center mt-9 transition duration-800 ease-in-out",
+      "text-xl tracking-wide text-center mt-2 transition duration-800 ease-in-out",
       solved || gameover
         ? "scale-125 lg:scale-150"
         : "scale-100 delay-300 duration-1000",
@@ -198,4 +189,19 @@ const Keyboard: FC<KeyboardProps> = ({
       />
     </div>
   </div>
+);
+
+export const Key: FC<{ value: ReactNode } & ComponentProps<"button">> = ({
+  value,
+  ...props
+}) => (
+  <button
+    className={[
+      "rounded-xl h-10 w-full flex justify-center items-center text-[#22222f] font-black text-2xl p-1 tracking-tighter",
+      "bg-yellow-100/50 hover:bg-violet-200/50 active:scale-95",
+    ].join(" ")}
+    {...props}
+  >
+    {value}
+  </button>
 );

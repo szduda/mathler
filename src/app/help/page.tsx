@@ -48,7 +48,7 @@ export default function Help() {
             height={287}
           />
           <p className="mt-3 text-center">
-            An example game of 12.
+            An example game of 123.
             <br />
             Both{" "}
             <span className="py-0.5 px-2 rounded-lg bg-white/10 font-bold tracking-widest">

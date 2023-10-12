@@ -5,24 +5,28 @@ import {
   validate,
 } from "@/helpers";
 import { evaluateAnswer, getRiddleAnswer } from "@/app/riddle";
+import { isNumber } from "mathjs";
 
 type SolutionRoute = {
   params: {
     input: string;
+    id: number;
   };
 };
 
 export const POST = async (
   req: Request,
-  { params: { input } }: SolutionRoute
+  { params: { input, id } }: SolutionRoute
 ) => {
+  if (!isNumber(id)) {
+    return Response.json({ message: "Invalid ID" }, { status: 400 });
+  }
+
   const { valid, message } = validate(input);
   if (!valid) {
     return Response.json({ message }, { status: 400 });
   }
 
-  // const id = Math.trunc(Date.now() / (24 * 3600 * 1000));
-  const id = Math.trunc(Date.now() / (3600 * 1000));
   const riddleAnswer = getRiddleAnswer(id);
   const riddle = evaluateAnswer(riddleAnswer);
 

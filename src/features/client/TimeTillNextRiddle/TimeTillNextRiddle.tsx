@@ -48,5 +48,4 @@ export const TimeTillNextRiddle = () => {
       )}
     </div>
   );
-  // return `Next riddle in ${timeString}`;
 };

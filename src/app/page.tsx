@@ -13,13 +13,6 @@ export default function Home() {
       <h1 className="uppercase tracking-widest text-5xl text-neutral-300/50 mb-6">
         Mathler
       </h1>
-
-      <h2 className="text-lg tracking-wide text-center">
-        The hidden calculation equals
-      </h2>
-      <div className="text-3xl rounded-full p-3 bg-black/60 font-black text-white mt-2">
-        {riddle}
-      </div>
       <Game riddle={riddle} id={id} />
       <Link
         href="/help"
