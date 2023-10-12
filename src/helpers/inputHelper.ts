@@ -1,25 +1,33 @@
 import { evaluateAnswer } from "@/app/riddle";
 import { Hint } from "@/features/client/Game/types";
 
-// Numbers: non-negative, no leading zeros, up to 3 digits
+export const INPUT_LENGTH = 6;
+
+// Numbers: non-negative, no leading zeros, up to 3 digits.
 const NUMBER = /0|[1-9]\d{0,2}/.source;
 // Operators: + - * /
 const OPERATOR = /[\+\-\*\/]/.source;
 
+// Use on full length input.
 const inputFormatRegex = new RegExp(
   `^(${NUMBER})((${OPERATOR})(${NUMBER}))?(${OPERATOR})(${NUMBER})$`,
   "g"
 );
 
+// Use on input single char.
+const charsetRegex = new RegExp(`[0-9]|${OPERATOR}`);
+
+// Use to search for the equation elements.
 const equationPartsRegex = new RegExp(
   `^(?<n1>${NUMBER})(?<o1>${OPERATOR})?(?<n2>${NUMBER})?(?<o2>${OPERATOR})(?<n3>${NUMBER})$`,
   "g"
 );
 
-export const isDigitValid = (digit: string) =>
-  new RegExp(`[0-9]|${OPERATOR}`).test(digit);
-
-export const INPUT_LENGTH = 6;
+export const isDigitValid = (digit: string) => {
+  const valid = digit.length === 1 && charsetRegex.test(digit);
+  charsetRegex.lastIndex = 0;
+  return valid;
+};
 
 export const validate = (input: string) => {
   if (input.length !== INPUT_LENGTH) {
@@ -64,13 +72,6 @@ export const rankInput = (input: string, solution: string) => {
       console.log(char, correct, allMisplaced, misplaced);
       hints[index].misplaced = misplaced;
     }
-    // return {
-    //   char,
-    //   correct,
-    //   misplaced,
-    //   // misplaced: !correct && solution[index] !== char &&  solution.includes(char),
-    //   // misplaced: hints.findIndex(hint => ) hints.find((hint) => hint.char === char && hint.correct),
-    // };
   });
 
   const correctLen = Object.values(hints).filter((hint) => hint.correct).length;
