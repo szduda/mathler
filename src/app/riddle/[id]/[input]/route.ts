@@ -10,7 +10,7 @@ import { isNumber } from "mathjs";
 type SolutionRoute = {
   params: {
     input: string;
-    id: number;
+    id: string;
   };
 };
 
@@ -18,7 +18,8 @@ export const POST = async (
   req: Request,
   { params: { input, id } }: SolutionRoute
 ) => {
-  if (!isNumber(id)) {
+  const _id = Number(id);
+  if (!isNumber(_id)) {
     return Response.json({ message: "Invalid ID" }, { status: 400 });
   }
 
@@ -27,7 +28,7 @@ export const POST = async (
     return Response.json({ message }, { status: 400 });
   }
 
-  const riddleAnswer = getRiddleAnswer(id);
+  const riddleAnswer = getRiddleAnswer(_id);
   const riddle = evaluateAnswer(riddleAnswer);
 
   if (evaluateAnswer(input) !== riddle) {
