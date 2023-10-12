@@ -41,7 +41,7 @@ export const GameRow: FC<Props> = ({
               ? "bg-yellow-500"
               : "bg-gray-600/50"
             : solved
-            ? "bg-green-900/25 scale-[4000%] !rounded-full"
+            ? "bg-green-900/25 scale-x-[4000%] scale-y-[3000%] !rounded-full !rotate-0"
             : !hints
             ? "bg-yellow-50/25"
             : "",
