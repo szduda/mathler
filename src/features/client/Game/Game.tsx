@@ -101,8 +101,8 @@ export const Key: FC<{ value: ReactNode } & ComponentProps<"button">> = ({
 }) => (
   <button
     className={[
-      "rounded-xl h-10 w-full flex justify-center items-center text-[#22222f] font-black text-2xl transition duration-500 ease-in-out p-1 tracking-tighter",
-      "bg-neutral-200",
+      "rounded-xl h-10 w-full flex justify-center items-center text-[#22222f] font-black text-2xl p-1 tracking-tighter",
+      "bg-neutral-200 hover:bg-neutral-100 active:scale-95",
     ].join(" ")}
     {...props}
   >

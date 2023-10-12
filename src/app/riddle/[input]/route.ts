@@ -21,7 +21,8 @@ export const POST = async (
     return Response.json({ message }, { status: 400 });
   }
 
-  const id = Math.trunc(Date.now() / (24 * 3600 * 1000));
+  // const id = Math.trunc(Date.now() / (24 * 3600 * 1000));
+  const id = Math.trunc(Date.now() / (3600 * 1000));
   const riddleAnswer = getRiddleAnswer(id);
   const riddle = evaluateAnswer(riddleAnswer);
 
