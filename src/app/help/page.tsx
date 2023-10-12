@@ -22,8 +22,8 @@ export default function Help() {
       <ul className="text-lg list-disc ml-4 [&>li]:mt-3">
         <li>You can play with keyboard or mouse</li>
         <li>
-          The riddle changes every 24h, but you can finish your riddle as long
-          as you don't refresh or leave the page.
+          The riddle changes every 24h, but you can finish your riddle unless
+          you refresh or leave the page.
         </li>
       </ul>
       <h3 className="text-2xl tracking-wide text-center mt-16">Rules</h3>
@@ -64,7 +64,7 @@ export default function Help() {
         </li>
       </ul>
       <div className="my-24">
-        <p>That's all, now let's</p>
+        <p>That&rsquo;s all, now let&rsquo;s</p>
         <Link href="/">
           <Button>Play The Game</Button>
         </Link>
