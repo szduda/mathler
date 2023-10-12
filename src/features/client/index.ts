@@ -1,3 +1,3 @@
 "use client";
 
-export { SubmitSolution } from "./SubmitSolution/SubmitSolution";
+export { Game } from "./Game/Game";
