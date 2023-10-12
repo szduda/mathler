@@ -39,16 +39,6 @@ export const useGame = (riddle: number, id: number) => {
 
   // keyboard control
   useEffect(() => {
-    const setNextCursor = () =>
-      setCursor(Math.min(cursor + 1, INPUT_LENGTH - 1));
-    const setPrevCursor = () => setCursor(Math.max(cursor - 1, 0));
-
-    const updateDigit = (digit: string, index: number = cursor) => {
-      let newInput = [...input];
-      newInput[index] = digit;
-      setInput(newInput.join(""));
-    };
-
     const handleKeyboard = (event: KeyboardEvent) => {
       if (event.key === "Enter") {
         if (input.length !== INPUT_LENGTH) {
@@ -88,6 +78,15 @@ export const useGame = (riddle: number, id: number) => {
     setGameover(false);
     setSolved(false);
     setCursor(0);
+  };
+
+  const setNextCursor = () => setCursor(Math.min(cursor + 1, INPUT_LENGTH - 1));
+  const setPrevCursor = () => setCursor(Math.max(cursor - 1, 0));
+
+  const updateDigit = (digit: string, index: number = cursor) => {
+    let newInput = [...input];
+    newInput[index] = digit;
+    setInput(newInput.join(""));
   };
 
   const submit = async () => {
@@ -147,5 +146,8 @@ export const useGame = (riddle: number, id: number) => {
     input,
     cursor,
     clearAnswer,
+    updateDigit,
+    setPrevCursor,
+    setNextCursor,
   };
 };

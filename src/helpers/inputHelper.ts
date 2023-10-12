@@ -69,7 +69,6 @@ export const rankInput = (input: string, solution: string) => {
       allMisplaced = allMisplaced
         .sort((c1, c2) => (c2 === char ? 1 : c1 === char ? -1 : 0))
         .slice(1);
-      console.log(char, correct, allMisplaced, misplaced);
       hints[index].misplaced = misplaced;
     }
   });
