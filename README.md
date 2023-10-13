@@ -1,8 +1,7 @@
 # Mathler
-#### Find the hidden equation
-
-## Run the server
-#### Development
+Find the hidden equation
+---
+### Development
 
 ```bash
 yarn dev
@@ -18,7 +17,7 @@ yarn build && yarn start
 yarn test:e2e
 ```
 
-#### Production
+### Production
 
 ```bash
 yarn build && yarn start
