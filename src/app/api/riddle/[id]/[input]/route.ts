@@ -1,5 +1,4 @@
-import { isNumber } from "mathjs";
-import { evaluateAnswer, getRiddleAnswer } from "@/app/riddle";
+import { evaluateAnswer, getRiddleAnswer } from "@/app/api/riddle";
 import {
   getAcceptedInputs,
   matchSolution,
@@ -19,7 +18,7 @@ export const POST = async (
   { params: { input, id } }: SolutionRoute
 ) => {
   const _id = Number(id);
-  if (!isNumber(_id)) {
+  if (!Number.isInteger(_id)) {
     return Response.json({ message: "Invalid ID" }, { status: 400 });
   }
 

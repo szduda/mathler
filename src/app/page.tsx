@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { evaluateAnswer, getRiddleAnswer } from "@/app/riddle";
+import { evaluateAnswer, getRiddleAnswer } from "@/app/api/riddle";
 import { Game } from "@/features/client";
 import { Logo, RiddleInfo } from "@/features/server";
 

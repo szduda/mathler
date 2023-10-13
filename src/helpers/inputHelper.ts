@@ -1,4 +1,4 @@
-import { evaluateAnswer } from "@/app/riddle";
+import { evaluateAnswer } from "@/app/api/riddle/evaluateAnswer";
 import { Hint } from "@/features/client/Game/types";
 
 export const INPUT_LENGTH = 6;
@@ -59,13 +59,13 @@ export const rankInput = (input: string, solution: string) => {
     misplaced: false,
   }));
 
-  let allMisplaced = [...input].filter((char, i) =>
+  let allMisplaced = [...input].filter((char) =>
     [...solution].filter((_, j) => !hints[j].correct).includes(char)
   );
 
   hints.forEach(({ char, correct }, index) => {
     const misplaced = allMisplaced.includes(char);
-    if (misplaced) {
+    if (misplaced && !correct) {
       allMisplaced = allMisplaced
         .sort((c1, c2) => (c2 === char ? 1 : c1 === char ? -1 : 0))
         .slice(1);

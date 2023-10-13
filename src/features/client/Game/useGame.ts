@@ -7,7 +7,7 @@ const defaultMessage = {
   text: "Ready?",
 };
 
-export const useGame = (riddle: number, id: number) => {
+export const useGame = (id: number) => {
   const [solved, setSolved] = useState(false);
   const [gameover, setGameover] = useState(false);
   const [message, setMessage] = useState<Message>(defaultMessage);
@@ -99,7 +99,7 @@ export const useGame = (riddle: number, id: number) => {
     }
 
     setMessage({ text: "Let me check that answer..." });
-    const res = await fetch(`/riddle/${id}/${encodeURIComponent(input)}`, {
+    const res = await fetch(`api/riddle/${id}/${encodeURIComponent(input)}`, {
       method: "POST",
     });
 

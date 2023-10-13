@@ -36,14 +36,15 @@ export const TimeTillNextRiddle = () => {
 
   return (
     <div>
-      Next riddle in
+      <span>Next riddle in</span>
       {timeSpan && (
         <>
-          <span className="text-2xl px-2">{timeSpan.hours}</span>h
+          <span className="text-2xl px-2">{timeSpan.hours}</span>
+          <span>h</span>
           <span className="text-2xl px-2 animate-bounce inline-block">
             {timeSpan.minutes}
           </span>
-          m
+          <span>m</span>
         </>
       )}
     </div>
