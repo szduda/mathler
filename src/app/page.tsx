@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { evaluateAnswer, getRiddleAnswer } from "@/app/riddle";
 import { Game } from "@/features/client";
+import { Logo, RiddleInfo } from "@/features/server";
 
 export default function Home() {
   // const id = Math.trunc(Date.now() / (24 * 3600 * 1000));
   const id = Math.trunc(Date.now() / (3600 * 1000));
   const riddle = evaluateAnswer(getRiddleAnswer(id));
-  const suffix = getNumberSuffix(id);
 
   return (
     <main className="flex flex-col items-center justify-start pt-12 p-2 max-w-[320px] mx-auto">
-      <h1 className="uppercase tracking-widest text-5xl text-neutral-300/50 mb-6">
-        Mathler
+      <h1>
+        <Logo />
       </h1>
       <Game riddle={riddle} id={id} />
       <Link
@@ -20,24 +20,9 @@ export default function Home() {
       >
         Help
       </Link>
-      <div className="mt-4">
-        <small>the riddle for</small>
-        <span className="tracking-widest font-black pl-1">{id}</span>
-        <small>{suffix} day of UNIX time</small>
-      </div>
+      <RiddleInfo id={id} />
     </main>
   );
 }
 
-const getNumberSuffix = (id: number) => {
-  const lastNumberInId = [...String(id)].pop() ?? "";
-  const suffixes: Record<string, string> = {
-    "1": "st",
-    "2": "nd",
-    "3": "rd",
-    default: "th",
-  };
-  return suffixes?.[lastNumberInId] ?? suffixes.default;
-};
-
-export const revalidate = 3600;
+export const revalidate = 60;

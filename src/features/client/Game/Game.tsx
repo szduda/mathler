@@ -1,9 +1,11 @@
-import { ComponentProps, FC, ReactNode } from "react";
+import { FC } from "react";
 import { Button } from "@/features/server";
 import { TimeTillNextRiddle } from "@/features/client";
-import { INPUT_LENGTH } from "@/helpers";
+import { INPUT_LENGTH, cx } from "@/helpers";
 import { GameRow } from "./GameRow";
 import { useGame } from "./useGame";
+import { Keyboard } from "./Keyboard";
+import { FeedbackMessage } from "./FeedbackMessage";
 
 type Props = {
   riddle: number;
@@ -24,6 +26,20 @@ export const Game: FC<Props> = ({ riddle, id }) => {
     setPrevCursor,
     setNextCursor,
   } = useGame(riddle, id);
+
+  const bottomSectionClasses = cx([
+    "w-full flex flex-col items-center mt-12 transition ease-in-out",
+    (solved || gameover) && "-translate-y-[182px]",
+  ]);
+
+  const bottomTextClasses = cx([
+    "text-center text-lg tracking-wide",
+    message.className,
+  ]);
+
+  const nextAnswerPlaceholders = [
+    ...Array(Math.max(0, INPUT_LENGTH - 1 - hintses.length)),
+  ];
 
   return (
     <div className="flex justify-center items-center flex-col">
@@ -55,11 +71,9 @@ export const Game: FC<Props> = ({ riddle, id }) => {
         )}
 
         {/* next answers */}
-        {[...Array(Math.max(0, INPUT_LENGTH - 1 - hintses.length))].map(
-          (_, index) => (
-            <GameRow key={index} />
-          )
-        )}
+        {nextAnswerPlaceholders.map((_, index) => (
+          <GameRow key={index} />
+        ))}
       </div>
 
       <Keyboard
@@ -71,18 +85,8 @@ export const Game: FC<Props> = ({ riddle, id }) => {
         cursor={cursor}
       />
 
-      <div
-        className={[
-          "w-full flex flex-col items-center mt-12 transition ease-in-out",
-          solved || gameover ? "-translate-y-[182px]" : "",
-        ].join(" ")}
-      >
-        <div
-          className={[
-            "text-center text-lg tracking-wide",
-            message.className,
-          ].join(" ")}
-        >
+      <div className={bottomSectionClasses}>
+        <div className={bottomTextClasses}>
           {solved || gameover ? <TimeTillNextRiddle /> : message.text}
         </div>
 
@@ -100,108 +104,3 @@ export const Game: FC<Props> = ({ riddle, id }) => {
     </div>
   );
 };
-
-export const FeedbackMessage: FC<{ solved?: boolean; gameover?: boolean }> = ({
-  solved,
-  gameover,
-}) => (
-  <h2
-    className={[
-      "text-xl tracking-wide text-center mt-2 transition duration-800 ease-in-out",
-      solved || gameover
-        ? "scale-125 lg:scale-150"
-        : "scale-100 delay-300 duration-1000",
-    ].join(" ")}
-  >
-    {solved ? (
-      <>
-        Bravo!
-        <br />
-        You solved this riddle.
-      </>
-    ) : gameover ? (
-      <>
-        So close!
-        <br />
-        Good luck next time.
-      </>
-    ) : (
-      <>
-        &nbsp;
-        <br />
-        Will you guess it?
-      </>
-    )}
-  </h2>
-);
-
-type KeyboardProps = {
-  hidden?: boolean;
-  setPrevCursor(): void;
-  setNextCursor(): void;
-  updateDigit(digit: string, index?: number): void;
-  input: string;
-  cursor: number;
-};
-
-const Keyboard: FC<KeyboardProps> = ({
-  hidden,
-  setPrevCursor,
-  setNextCursor,
-  updateDigit,
-  input,
-  cursor,
-}) => (
-  <div
-    className={[
-      "grid grid-cols-6 md:grid-cols-7 gap-1 w-full transition duration-500",
-      hidden ? "scale-0" : "",
-    ].join(" ")}
-  >
-    {[...Array(10)].map((_, index) => (
-      <Key
-        key={index}
-        value={index}
-        onClick={() => {
-          updateDigit(String(index));
-          setNextCursor();
-        }}
-      />
-    ))}
-    {["+", "-", "*", "/"].map((operator) => (
-      <Key
-        key={operator}
-        value={operator}
-        onClick={() => {
-          updateDigit(operator);
-          setNextCursor();
-        }}
-      />
-    ))}
-    <div className="col-span-4 md:col-span-3 md:col-start-3">
-      <Key
-        value="Backspace"
-        onClick={() => {
-          const isEmpty = input[cursor] === " ";
-          updateDigit(" ", isEmpty ? cursor - 1 : cursor);
-          if (isEmpty) setPrevCursor();
-        }}
-      />
-    </div>
-  </div>
-);
-
-export const Key: FC<{ value: ReactNode } & ComponentProps<"button">> = ({
-  value,
-  ...props
-}) => (
-  <button
-    className={[
-      "rounded-xl h-10 w-full flex justify-center items-center text-[#22222f] font-black text-2xl p-1 tracking-tighter",
-      "bg-yellow-100/50 hover:bg-violet-200/50 active:scale-95",
-    ].join(" ")}
-    {...props}
-  >
-    {value}
-  </button>
-);

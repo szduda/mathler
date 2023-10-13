@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { INPUT_LENGTH } from "@/helpers";
+import { INPUT_LENGTH, cx } from "@/helpers";
 import { Hint } from "./types";
 
 type Props = (
@@ -31,7 +31,7 @@ export const GameRow: FC<Props> = ({
           transitionDelay: `${(1 + (solved ? index : -1)) * 50}ms`,
           zIndex: solved ? -100 : -10,
         }}
-        className={[
+        className={cx([
           "absolute -z-10 left-0 right-0 top-0 w-auto h-full rounded-xl transition duration-500 ease-out border-4",
           selectedIndex === index ? "border-yellow-200" : "border-transparent",
           hints
@@ -46,13 +46,13 @@ export const GameRow: FC<Props> = ({
             ? "bg-yellow-50/25"
             : "",
           bgClass,
-        ].join(" ")}
+        ])}
       />
       <div
-        className={[
+        className={cx([
           "absolute left-0 right-0 top-0 p-1 w-full h-full flex justify-center items-center text-2xl font-black transition duration-300 ease-out",
           solved ? "text-white scale-150" : "text-[#22222f]",
-        ].join(" ")}
+        ])}
       >
         {hints ? hints![index].char : value?.[index] ?? ""}
       </div>

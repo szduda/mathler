@@ -1,11 +1,11 @@
+import { isNumber } from "mathjs";
+import { evaluateAnswer, getRiddleAnswer } from "@/app/riddle";
 import {
   getAcceptedInputs,
   matchSolution,
   rankInput,
   validate,
 } from "@/helpers";
-import { evaluateAnswer, getRiddleAnswer } from "@/app/riddle";
-import { isNumber } from "mathjs";
 
 type SolutionRoute = {
   params: {

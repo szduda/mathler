@@ -6,3 +6,4 @@ export {
   getAcceptedInputs,
   isDigitValid,
 } from "./inputHelper";
+export { cx } from "./cx";
