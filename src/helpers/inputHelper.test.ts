@@ -108,7 +108,7 @@ describe("inputHelper", () => {
     it("input format", () => {
       const msg = "Invalid expression.";
 
-      let result = validate("12*4++");
+      let result = validate("1*4++2");
       expect(result.valid).toEqual(false);
       expect(result.message).toEqual(msg);
 
@@ -124,7 +124,11 @@ describe("inputHelper", () => {
       expect(result.valid).toEqual(false);
       expect(result.message).toEqual(msg);
 
-      result = validate("12++56");
+      result = validate("-50+10");
+      expect(result.valid).toEqual(false);
+      expect(result.message).toEqual(msg);
+
+      result = validate("+12+5+");
       expect(result.valid).toEqual(false);
       expect(result.message).toEqual(msg);
 

@@ -48,7 +48,10 @@ export const Game: FC<Props> = ({ riddle, id }) => {
       <h2 className="text-lg tracking-wide text-center mt-3 opacity-70">
         The hidden calculation equals
       </h2>
-      <div className="text-3xl rounded-full p-3 bg-black/60 font-black text-white mt-5">
+      <div
+        className="text-3xl rounded-full p-3 bg-black/60 font-black text-white mt-5"
+        data-test-id="riddle"
+      >
         {riddle}
       </div>
       <div

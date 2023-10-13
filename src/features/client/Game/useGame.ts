@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { INPUT_LENGTH, isDigitValid } from "@/helpers";
+import { INPUT_LENGTH } from "@/helpers";
 import { Hint, Message, RiddleResponse } from "./types";
+import { useKeyboard } from "./useKeyboard";
 
 const defaultInput = " ".repeat(INPUT_LENGTH);
 const defaultMessage = {
@@ -36,39 +37,6 @@ export const useGame = (id: number) => {
       clearAnswer();
     }
   }, [id]);
-
-  // keyboard control
-  useEffect(() => {
-    const handleKeyboard = (event: KeyboardEvent) => {
-      if (event.key === "Enter") {
-        if (input.length !== INPUT_LENGTH) {
-          return;
-        }
-        submit();
-      } else if (event.key === "Backspace") {
-        if (input[cursor] === " ") {
-          updateDigit(" ", Math.max(0, cursor - 1));
-          setPrevCursor();
-        } else {
-          updateDigit(" ");
-        }
-      } else if (isDigitValid(event.key)) {
-        updateDigit(event.key);
-        setNextCursor();
-      } else if (["ArrowRight", " "].includes(event.key)) {
-        setNextCursor();
-      } else if (event.key === "ArrowLeft") {
-        setPrevCursor();
-      }
-    };
-
-    if (solved) {
-      removeEventListener("keydown", handleKeyboard);
-    } else {
-      addEventListener("keydown", handleKeyboard);
-    }
-    return () => removeEventListener("keydown", handleKeyboard);
-  }, [solved, cursor, input]);
 
   const clearAnswer = () => {
     localStorage.removeItem("mathler");
@@ -136,6 +104,17 @@ export const useGame = (id: number) => {
       );
     }
   };
+
+  // keyboard control
+  useKeyboard(
+    input,
+    submit,
+    cursor,
+    updateDigit,
+    setPrevCursor,
+    setNextCursor,
+    solved || gameover
+  );
 
   return {
     solved,

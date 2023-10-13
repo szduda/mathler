@@ -32,7 +32,7 @@ export const GameRow: FC<Props> = ({
           zIndex: solved ? -100 : -10,
         }}
         className={cx([
-          "absolute -z-10 left-0 right-0 top-0 w-auto h-full rounded-xl transition duration-500 ease-out border-4",
+          "absolute -z-10 left-0 right-0 top-0 w-auto h-full rounded-xl transition duration-700 ease-out border-4",
           selectedIndex === index ? "border-yellow-200" : "border-transparent",
           hints
             ? hints[index]?.correct

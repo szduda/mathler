@@ -3,7 +3,6 @@ import { cx } from "@/helpers";
 
 export const Button: FC<ComponentProps<"button">> = ({
   className = "bg-violet-800 hover:bg-violet-700",
-  hidden,
   ...props
 }) => (
   <button

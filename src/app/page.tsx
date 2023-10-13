@@ -4,8 +4,8 @@ import { Game } from "@/features/client";
 import { Logo, RiddleInfo } from "@/features/server";
 
 export default function Home() {
-  // const id = Math.trunc(Date.now() / (24 * 3600 * 1000));
-  const id = Math.trunc(Date.now() / (3600 * 1000));
+  const id =
+    Number(process.env.FIX_SEED) ?? Math.trunc(Date.now() / (24 * 3600 * 1000));
   const riddle = evaluateAnswer(getRiddleAnswer(id));
 
   return (
