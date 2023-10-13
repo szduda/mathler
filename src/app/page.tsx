@@ -5,7 +5,9 @@ import { Logo, RiddleInfo } from "@/features/server";
 
 export default function Home() {
   const id =
-    Number(process.env.FIX_SEED) ?? Math.trunc(Date.now() / (24 * 3600 * 1000));
+    typeof process.env.FIX_SEED === "undefined"
+      ? Math.trunc(Date.now() / (24 * 3600 * 1000))
+      : Number(process.env.FIX_SEED);
   const riddle = evaluateAnswer(getRiddleAnswer(id));
 
   return (
