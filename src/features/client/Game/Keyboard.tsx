@@ -20,7 +20,7 @@ export const Keyboard: FC<Props> = ({
 }) => (
   <div
     className={cx([
-      "grid grid-cols-6 md:grid-cols-7 gap-1 w-full transition duration-500",
+      "grid grid-cols-6 md:grid-cols-7 gap-1 w-full",
       hidden ? "scale-0" : "",
     ])}
   >

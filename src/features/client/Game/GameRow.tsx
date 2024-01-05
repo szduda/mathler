@@ -41,7 +41,7 @@ export const GameRow: FC<Props> = ({
               ? "bg-yellow-500"
               : "bg-gray-600/50"
             : solved
-            ? "bg-green-900/25 scale-x-[4000%] scale-y-[3000%] xl:scale-x-[6000%] xl:scale-y-[3000%] -translate-y-[300%] !rounded-full !rotate-0"
+            ? "bg-green-900/25 scale-x-[3000%] scale-y-[3000%] xl:scale-x-[4000%] xl:scale-y-[3000%] -translate-y-[300%] !-rotate-[7deg]"
             : !hints
             ? "bg-yellow-50/25"
             : "",
@@ -50,7 +50,7 @@ export const GameRow: FC<Props> = ({
       />
       <div
         className={cx([
-          "absolute left-0 right-0 top-0 p-1 w-full h-full flex justify-center items-center text-2xl font-black transition duration-300 ease-out",
+          "absolute left-0 right-0 top-0 p-1 w-full h-full flex justify-center items-center text-2xl font-black",
           solved ? "text-white scale-150" : "text-[#22222f]",
         ])}
       >

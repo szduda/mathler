@@ -28,7 +28,7 @@ export const Game: FC<Props> = ({ riddle, id }) => {
   } = useGame(id);
 
   const bottomSectionClasses = cx([
-    "w-full flex flex-col items-center mt-12 transition ease-in-out",
+    "w-full flex flex-col items-center mt-12",
     (solved || gameover) && "-translate-y-[182px]",
   ]);
 
